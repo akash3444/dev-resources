@@ -10,6 +10,7 @@ export const resourceType = defineType({
     defineField({
       name: "title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
@@ -17,6 +18,7 @@ export const resourceType = defineType({
       options: {
         source: "title",
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "mainImage",
@@ -35,6 +37,7 @@ export const resourceType = defineType({
     defineField({
       name: "body",
       type: "text",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "website",
@@ -47,8 +50,8 @@ export const resourceType = defineType({
       type: "url",
     }),
     defineField({
-      name: "twitter",
-      title: "Twitter Link",
+      name: "npm",
+      title: "NPM Link",
       type: "url",
     }),
     defineField({
@@ -57,24 +60,14 @@ export const resourceType = defineType({
       type: "url",
     }),
     defineField({
+      name: "twitter",
+      title: "Twitter Link",
+      type: "url",
+    }),
+    defineField({
       name: "categories",
       type: "array",
       of: [defineArrayMember({ type: "reference", to: { type: "category" } })],
     }),
-    defineField({
-      name: "publishedAt",
-      type: "datetime",
-    }),
   ],
-  preview: {
-    select: {
-      title: "title",
-      author: "author.name",
-      media: "mainImage",
-    },
-    prepare(selection) {
-      const { author } = selection;
-      return { ...selection, subtitle: author && `by ${author}` };
-    },
-  },
 });

@@ -1,12 +1,16 @@
-export default function Home() {
-  return (
-    <div className="flex flex-1 flex-col gap-4">
-      <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-        <div className="aspect-video rounded-xl bg-muted/50" />
-        <div className="aspect-video rounded-xl bg-muted/50" />
-        <div className="aspect-video rounded-xl bg-muted/50" />
-      </div>
-      <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-    </div>
+import { ResourceList } from "@/components/resource";
+import { RESOURCES_QUERY } from "@/queries/resource";
+import { client } from "@/sanity/lib/client";
+import { SanityDocument } from "next-sanity";
+
+const options = { next: { revalidate: 60 } };
+
+export default async function Home() {
+  const resources = await client.fetch<SanityDocument[]>(
+    RESOURCES_QUERY,
+    {},
+    options,
   );
+
+  return <ResourceList resources={resources} />;
 }

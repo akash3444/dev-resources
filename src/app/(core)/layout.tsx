@@ -12,7 +12,7 @@ export default function RootLayout({
       <AppSidebar />
       <SidebarInset>
         <Header />
-        <div className="p-4">{children}</div>
+        <div className="p-6">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );
