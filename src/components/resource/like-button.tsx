@@ -5,6 +5,8 @@ import { Heart } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/contexts/user-context";
 
 interface LikeButtonProps {
   resourceId: string;
@@ -16,8 +18,15 @@ const LikeButton = ({ resourceId, count, likedByMe }: LikeButtonProps) => {
   const [liked, setLiked] = useState(likedByMe);
   const [likeCount, setLikeCount] = useState(count);
   const { likeResource, unlikeResource } = useResourceLike();
+  const userData = useUser();
+  const router = useRouter();
 
   const handleLikeToggle = async () => {
+    if (!userData?.data?.user) {
+      router.push("/login");
+      return;
+    }
+
     if (liked) {
       setLiked(false);
       setLikeCount((likeCount) => likeCount - 1);

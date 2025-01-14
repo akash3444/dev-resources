@@ -1,7 +1,7 @@
 "use client";
 
+import { useUser } from "@/contexts/user-context";
 import { createClient } from "@/utils/supabase/client";
-import { useUser } from "../auth";
 
 export const useResourceLike = () => {
   const supabase = createClient();
