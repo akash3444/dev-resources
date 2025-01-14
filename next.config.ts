@@ -7,9 +7,6 @@ const nextConfig: NextConfig = {
         hostname: "www.google.com",
       },
       {
-        hostname: "cdn.sanity.io",
-      },
-      {
         hostname: "xwiqrnwysxhuuwdfigqc.supabase.co",
       },
     ],
