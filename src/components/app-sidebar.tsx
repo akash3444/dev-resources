@@ -5,11 +5,13 @@ import {
   Code,
   FlaskConical,
   GitFork,
+  ImageIcon,
   Key,
   LayoutList,
   LayoutPanelLeft,
   LibraryBig,
   PaintBucket,
+  Palette,
   Server,
   TextCursorInput,
 } from "lucide-react";
@@ -21,6 +23,7 @@ import {
   SidebarContent,
   SidebarHeader,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
 import Logo from "./logo";
 
 const data = {
@@ -34,6 +37,25 @@ const data = {
       title: "Code Editor",
       slug: "code-editor",
       icon: Code,
+    },
+    {
+      title: "CSS Tools",
+      slug: "css-tools",
+      icon: Palette,
+      items: [
+        {
+          title: "Color Palette Generator",
+          slug: "color-palette-generator",
+        },
+        {
+          title: "Gradient Generator",
+          slug: "gradient-generator",
+        },
+        {
+          title: "SVG Background Generator",
+          slug: "svg-background-generator",
+        },
+      ],
     },
     {
       title: "Deployment",
@@ -85,6 +107,11 @@ const data = {
       icon: LibraryBig,
     },
     {
+      title: "Illustrations",
+      slug: "illustrations",
+      icon: ImageIcon,
+    },
+    {
       title: "Testing",
       slug: "testing",
       icon: FlaskConical,
@@ -121,12 +148,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader className="px-3 py-4 transition-all group-data-[state=collapsed]:px-2">
-        <div className="flex items-center gap-3 font-semibold text-foreground">
-          <Logo />
-          <span className="whitespace-nowrap group-data-[state=collapsed]:hidden">
-            Dev Resources
-          </span>
-        </div>
+        <Link href="/">
+          <div className="flex items-center gap-3 font-semibold text-foreground">
+            <Logo />
+            <span className="whitespace-nowrap group-data-[state=collapsed]:hidden">
+              Dev Resources
+            </span>
+          </div>
+        </Link>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />

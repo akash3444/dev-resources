@@ -1,18 +1,24 @@
-import { SanityDocument } from "next-sanity";
+import { Database } from "@/types/supabase";
+import { ArrowUpRight, BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { GithubLogo, NPMLogo, XLogo } from "../icons";
-import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { ArrowUpRight, BookOpen } from "lucide-react";
-import { urlFor } from "@/sanity/lib/image";
+import { Button } from "../ui/button";
+import { createClient } from "@/utils/supabase/server";
 
 const IMAGE_SIZE = 64;
 
-export const ResourceCard = ({ resource }: { resource: SanityDocument }) => {
-  const favicon = `https://www.google.com/s2/favicons?domain=${resource.website}&sz=${IMAGE_SIZE}`;
-  const imageUrl = resource.mainImage
-    ? urlFor(resource.mainImage).size(IMAGE_SIZE, IMAGE_SIZE).url()
+export const ResourceCard = async ({
+  resource,
+}: {
+  resource: Database["public"]["Functions"]["get_resources"]["Returns"][0];
+}) => {
+  const supabase = await createClient();
+  const favicon = `https://www.google.com/s2/favicons?domain=${resource.website_url}&sz=${IMAGE_SIZE}`;
+  const imageUrl = resource.image_url
+    ? supabase.storage.from("resource_images").getPublicUrl(resource.image_url)
+        .data.publicUrl
     : favicon;
 
   return (
@@ -29,23 +35,27 @@ export const ResourceCard = ({ resource }: { resource: SanityDocument }) => {
           <span className="font-semibold">{resource.title}</span>
         </div>
         <div className="flex items-center">
-          {resource.github && (
+          {resource.github_url && (
             <Button variant="ghost" size="icon" asChild>
-              <Link href={resource.github} target="_blank" rel="noreferrer">
+              <Link href={resource.github_url} target="_blank" rel="noreferrer">
                 <GithubLogo className="!h-5 !w-5" />
               </Link>
             </Button>
           )}
-          {resource.npm && (
+          {resource.npm_url && (
             <Button variant="ghost" size="icon" asChild>
-              <Link href={resource.npm} target="_blank" rel="noreferrer">
+              <Link href={resource.npm_url} target="_blank" rel="noreferrer">
                 <NPMLogo className="!h-5 !w-5" />
               </Link>
             </Button>
           )}
-          {resource.twitter && (
+          {resource.twitter_url && (
             <Button variant="ghost" size="icon" asChild>
-              <Link href={resource.twitter} target="_blank" rel="noreferrer">
+              <Link
+                href={resource.twitter_url}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <XLogo className="!h-4 !w-4" />
               </Link>
             </Button>
@@ -53,11 +63,11 @@ export const ResourceCard = ({ resource }: { resource: SanityDocument }) => {
         </div>
       </div>
 
-      <div className="mt-4 flex items-center gap-1">
-        {resource.categories?.map(
-          ({ title, slug }: { title: string; slug: { current: string } }) => (
+      <div className="mt-4 flex flex-wrap items-center gap-1">
+        {(resource.categories as { title: string; slug: string }[]).map(
+          ({ title, slug }) => (
             <Badge
-              key={slug.current}
+              key={slug}
               className="bg-indigo-600/10 text-indigo-600 shadow-none hover:bg-indigo-600/20"
             >
               {title}
@@ -66,23 +76,19 @@ export const ResourceCard = ({ resource }: { resource: SanityDocument }) => {
         )}
       </div>
 
-      <p className="my-4">{resource.body}</p>
+      <p className="my-4">{resource.description}</p>
 
       <div className="mt-auto flex items-center gap-2">
-        {resource.website && (
+        {resource.website_url && (
           <Button size="sm" asChild>
-            <Link href={resource.website} target="_blank" rel="noreferrer">
+            <Link href={resource.website_url} target="_blank" rel="noreferrer">
               Visit <ArrowUpRight />
             </Link>
           </Button>
         )}
-        {resource.documentationUrl && (
+        {resource.docs_url && (
           <Button size="sm" asChild>
-            <Link
-              href={resource.documentationUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <Link href={resource.docs_url} target="_blank" rel="noreferrer">
               Docs <BookOpen />
             </Link>
           </Button>

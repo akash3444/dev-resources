@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "cdn.sanity.io",
       },
+      {
+        hostname: "xwiqrnwysxhuuwdfigqc.supabase.co",
+      },
     ],
   },
 };

@@ -11,6 +11,14 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.config({
+    plugins: ["svg-jsx"],
+    rules: {
+      "svg-jsx/camel-case-dash": "error",
+      "svg-jsx/camel-case-colon": "error",
+      "svg-jsx/no-style-string": "error",
+    },
+  }),
 ];
 
 export default eslintConfig;
