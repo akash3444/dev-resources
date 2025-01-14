@@ -174,6 +174,8 @@ export type Database = {
           image_url: string
           twitter_url: string
           categories: Json
+          likes_count: number
+          liked_by_me: boolean
         }[]
       }
       get_resources_by_category: {
@@ -192,6 +194,26 @@ export type Database = {
           image_url: string
           twitter_url: string
           categories: Json
+        }[]
+      }
+      get_resources_with_likes: {
+        Args: {
+          category?: string
+          order_by?: string
+        }
+        Returns: {
+          id: string
+          title: string
+          description: string
+          github_url: string
+          website_url: string
+          npm_url: string
+          docs_url: string
+          image_url: string
+          twitter_url: string
+          categories: Json
+          likes_count: number
+          liked_by_me: boolean
         }[]
       }
     }

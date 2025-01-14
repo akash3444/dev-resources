@@ -1,11 +1,12 @@
 import { Database } from "@/types/supabase";
+import { createClient } from "@/utils/supabase/server";
 import { ArrowUpRight, BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { GithubLogo, NPMLogo, XLogo } from "../icons";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { createClient } from "@/utils/supabase/server";
+import LikeButton from "./like-button";
 
 const IMAGE_SIZE = 64;
 
@@ -78,21 +79,32 @@ export const ResourceCard = async ({
 
       <p className="my-4">{resource.description}</p>
 
-      <div className="mt-auto flex items-center gap-2">
-        {resource.website_url && (
-          <Button size="sm" asChild>
-            <Link href={resource.website_url} target="_blank" rel="noreferrer">
-              Visit <ArrowUpRight />
-            </Link>
-          </Button>
-        )}
-        {resource.docs_url && (
-          <Button size="sm" asChild>
-            <Link href={resource.docs_url} target="_blank" rel="noreferrer">
-              Docs <BookOpen />
-            </Link>
-          </Button>
-        )}
+      <div className="mt-auto flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          {resource.website_url && (
+            <Button size="sm" asChild>
+              <Link
+                href={resource.website_url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Visit <ArrowUpRight />
+              </Link>
+            </Button>
+          )}
+          {resource.docs_url && (
+            <Button size="sm" asChild>
+              <Link href={resource.docs_url} target="_blank" rel="noreferrer">
+                Docs <BookOpen />
+              </Link>
+            </Button>
+          )}
+        </div>
+        <LikeButton
+          resourceId={resource.id}
+          count={resource.likes_count}
+          likedByMe={resource.liked_by_me}
+        />
       </div>
     </div>
   );
