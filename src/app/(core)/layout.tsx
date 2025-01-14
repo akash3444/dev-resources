@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
@@ -10,9 +11,10 @@ export default function RootLayout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>
+      <SidebarInset className="flex min-h-screen flex-col">
         <Header />
-        <div className="p-6">{children}</div>
+        <div className="grow p-6">{children}</div>
+        <Footer />
       </SidebarInset>
     </SidebarProvider>
   );
