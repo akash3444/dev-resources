@@ -1,5 +1,4 @@
 import { Database } from "@/types/supabase";
-import { createClient } from "@/utils/supabase/server";
 import { ArrowUpRight, BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,15 +6,16 @@ import { GithubLogo, NPMLogo, XLogo } from "../icons";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import LikeButton from "./like-button";
+import { createClient } from "@/utils/supabase/client";
 
 const IMAGE_SIZE = 64;
 
-export const ResourceCard = async ({
+export const ResourceCard = ({
   resource,
 }: {
   resource: Database["public"]["Functions"]["get_resources"]["Returns"][0];
 }) => {
-  const supabase = await createClient();
+  const supabase = createClient();
   const favicon = `https://www.google.com/s2/favicons?domain=${resource.website_url}&sz=${IMAGE_SIZE}`;
   const imageUrl = resource.image_url
     ? supabase.storage.from("resource_images").getPublicUrl(resource.image_url)

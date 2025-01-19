@@ -162,6 +162,9 @@ export type Database = {
         Args: {
           category?: string
           order_by?: string
+          search_query?: string
+          page?: number
+          page_size?: number
         }
         Returns: {
           id: string
@@ -176,6 +179,7 @@ export type Database = {
           categories: Json
           likes_count: number
           liked_by_me: boolean
+          has_more: boolean
         }[]
       }
       get_resources_by_category: {
@@ -200,6 +204,51 @@ export type Database = {
         Args: {
           category?: string
           order_by?: string
+        }
+        Returns: {
+          id: string
+          title: string
+          description: string
+          github_url: string
+          website_url: string
+          npm_url: string
+          docs_url: string
+          image_url: string
+          twitter_url: string
+          categories: Json
+          likes_count: number
+          liked_by_me: boolean
+        }[]
+      }
+      get_resources_with_pagination: {
+        Args: {
+          category?: string
+          order_by?: string
+          search_query?: string
+          page?: number
+          page_size?: number
+        }
+        Returns: {
+          id: string
+          title: string
+          description: string
+          github_url: string
+          website_url: string
+          npm_url: string
+          docs_url: string
+          image_url: string
+          twitter_url: string
+          categories: Json
+          likes_count: number
+          liked_by_me: boolean
+          has_more: boolean
+        }[]
+      }
+      get_resources_with_search: {
+        Args: {
+          category?: string
+          order_by?: string
+          search_query?: string
         }
         Returns: {
           id: string

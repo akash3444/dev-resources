@@ -1,12 +1,16 @@
-import { ResourceList } from "@/components/resource";
-import { createClient } from "@/utils/supabase/server";
+import { ResourceFilters, ResourceList } from "@/components/resource";
 
-export default async function Home() {
-  const supabase = await createClient();
-  // TODO: handle error
-  const { data: resources } = await supabase.rpc("get_resources", {
-    order_by: "title",
-  });
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ sortBy: string; q: string }>;
+}) {
+  const { q } = await searchParams;
 
-  return <ResourceList resources={resources || []} />;
+  return (
+    <>
+      <ResourceFilters />
+      <ResourceList searchQuery={q} />
+    </>
+  );
 }
