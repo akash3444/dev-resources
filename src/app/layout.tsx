@@ -15,8 +15,60 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dev Resources",
-  description: "Every resource you need as a developer to get started.",
+  title: "Dev Resources | Developer Resources Hub",
+  description:
+    "Every resource you need as a developer to get started. Find curated tools, guides, and learning materials to accelerate your development journey.",
+  keywords: [
+    "Dev Resources",
+    "Developer Resources",
+    "Programming Resources",
+    "Coding Resources",
+    "Developer Tools",
+    "Programming Tools",
+    "Web Development Resources",
+    "Software Development Resources",
+    "Developer Learning Resources",
+    "Code Learning Materials",
+    "Programming Learning Resources",
+    "Developer Documentation",
+    "Development Guides",
+    "Programming Tutorials",
+    "Tech Stack Resources",
+  ],
+  icons: [
+    {
+      url: "/apple-touch-icon.png",
+      type: "image/png",
+      rel: "apple-touch-icon",
+    },
+    {
+      sizes: "16x16",
+      url: "/favicon-16x16.png",
+      type: "image/png",
+      rel: "icon",
+    },
+    {
+      sizes: "32x32",
+      url: "/favicon-32x32.png",
+      type: "image/png",
+      rel: "icon",
+    },
+  ],
+  openGraph: {
+    title: "Dev Resources | Developer Resources Hub",
+    description:
+      "Every resource you need as a developer to get started. Find curated tools, guides, and learning materials to accelerate your development journey.",
+    type: "website",
+    images: [
+      {
+        url: "/images/og-image.png",
+        height: 630,
+        width: 1200,
+        alt: "Dev Resources - Your Complete Developer Resource Hub",
+      },
+    ],
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
