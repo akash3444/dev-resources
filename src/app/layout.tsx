@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/og-image.png",
+        url: "/og-image.png",
         height: 630,
         width: 1200,
         alt: "Dev Resources - Your Complete Developer Resource Hub",
