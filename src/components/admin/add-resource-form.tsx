@@ -25,11 +25,11 @@ import { useEffect, useState } from "react";
 const addResourceSchema = z.object({
   title: z.string().min(3),
   description: z.string().min(3),
-  website_url: z.string().url("Invalid URL").optional(),
-  github_url: z.string().url("Invalid URL").optional(),
-  docs_url: z.string().url("Invalid URL").optional(),
-  twitter_url: z.string().url("Invalid URL").optional(),
-  npm_url: z.string().url("Invalid URL").optional(),
+  website_url: z.string().optional(),
+  github_url: z.string().optional(),
+  docs_url: z.string().optional(),
+  twitter_url: z.string().optional(),
+  npm_url: z.string().optional(),
   categories: z.array(
     z.object({
       value: z.string(),
@@ -45,7 +45,16 @@ const AddResourceForm = ({ id, data }: { id: string; data: FormValues }) => {
   const supabase = createClient();
   const form = useForm<FormValues>({
     resolver: zodResolver(addResourceSchema),
-    defaultValues: data,
+    defaultValues: data || {
+      title: "",
+      description: "",
+      categories: [],
+      website_url: "",
+      docs_url: "",
+      twitter_url: "",
+      github_url: "",
+      npm_url: "",
+    },
   });
   const { isSubmitting } = form.formState;
   const { data: categories, isLoading } = useQuery({
