@@ -1,7 +1,9 @@
 "use client";
 
 import {
+  BookOpen,
   Brush,
+  ChartPie,
   Code,
   FlaskConical,
   GitFork,
@@ -10,8 +12,11 @@ import {
   LayoutList,
   LayoutPanelLeft,
   LibraryBig,
+  ListChecks,
   PaintBucket,
   Palette,
+  PencilRuler,
+  Rss,
   Server,
   TextCursorInput,
 } from "lucide-react";
@@ -32,6 +37,16 @@ const data = {
       title: "Authentication",
       slug: "authentication",
       icon: Key,
+    },
+    {
+      title: "Charts",
+      slug: "charts",
+      icon: ChartPie,
+    },
+    {
+      title: "Chrome Extension",
+      slug: "chrome-extension",
+      icon: PencilRuler,
     },
     {
       title: "Code Editor",
@@ -77,6 +92,16 @@ const data = {
       ],
     },
     {
+      title: "Dev Blog",
+      slug: "dev-blog",
+      icon: Rss,
+    },
+    {
+      title: "Documentation",
+      slug: "documentation",
+      icon: BookOpen,
+    },
+    {
       title: "UI/UX",
       slug: "ui-ux",
       icon: Brush,
@@ -112,6 +137,11 @@ const data = {
       icon: ImageIcon,
     },
     {
+      title: "Task Management",
+      slug: "task-management",
+      icon: ListChecks,
+    },
+    {
       title: "Testing",
       slug: "testing",
       icon: FlaskConical,
@@ -135,6 +165,11 @@ const data = {
       title: "UI Collection",
       slug: "ui-collection",
       icon: LayoutPanelLeft,
+    },
+    {
+      title: "Unstyled Components",
+      slug: "unstyled-components",
+      icon: PaintBucket,
     },
     {
       title: "Version Control",
